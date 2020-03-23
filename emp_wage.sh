@@ -18,24 +18,30 @@ fi
 isFullTime=1;
 isPartTime=2;
 
+totalSalary=0;
 empRatePerHr=20;
-empCheck=$((RANDOM%3));
+numWorkingDays=20;
 
-case $empCheck in
-	$isFullTime)
-		empHrs=12
-		echo "you're full time"
-		;;
-	$isPartTime)
-		empHrs=8
-		echo "you're part time"
-		;;
-	*)
-		empHrs=0
-		echo "you don't work"
-		;;
-esac
+for (( day=1; day<=$numWorkingDays; day++ ))
+do
+	empCheck=$((RANDOM%3));
+	case $empCheck in
+		$isFullTime)
+			empHrs=12
+			echo "worked full time"
+			;;
+		$isPartTime)
+			empHrs=8
+			echo "worked part time"
+			;;
+		*)
+			empHrs=0
+			echo "didn't work"
+			;;
+	esac
+	salary=$(($empHrs*$empRatePerHr));
+	totalSalary=$(($totalSalary+$salary));
+done
 
-salary=$(($empHrs*$empRatePerHr));
-echo "you'r daily wage is: "$salary
+echo "you'r wage for a month is: "$salary
 
