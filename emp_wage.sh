@@ -15,14 +15,20 @@ fi
 
 
 #calculating daily employee wage
+MAX_HRS_IN_MONTH=240;
+NUM_WORKING_DAYS=20;
+EMP_RATE_PER_HR=20;
+
 isFullTime=1;
 isPartTime=2;
 
-totalSalary=0;
-empRatePerHr=20;
-numWorkingDays=20;
 
-for (( day=1; day<=$numWorkingDays; day++ ))
+totalSalary=0;
+totalEmpHr=0;
+totalWorkingDays=0;
+
+while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH &&
+	$totalWorkingDays -lt $NUM_WORKING_DAYS ]]
 do
 	empCheck=$((RANDOM%3));
 	case $empCheck in
@@ -39,9 +45,10 @@ do
 			echo "didn't work"
 			;;
 	esac
-	salary=$(($empHrs*$empRatePerHr));
-	totalSalary=$(($totalSalary+$salary));
+	totalEmpHrs=$(($totalEmpHrs+$empHrs))
 done
+
+totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR));
 
 echo "you'r wage for a month is: "$salary
 
