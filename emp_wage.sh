@@ -16,25 +16,19 @@ fi
 
 #calculating daily employee wage
 isPartTime=1;
-isFullTime=2;
 
 empRatePerHr=20;
-empCheck=$((RANDOM%3));
+empCheck=$((RANDOM%2));
 
-case $empCheck in
-	$isFullTime)
-		empHrs=8
-		echo "you're full time"
-		;;
-	$isPartTime)
-		empHrs=4
-		echo "you're part time"
-		;;
-	*)
-		empHrs=0
-		echo "you don't work"
-		;;
-esac
+if [ $empCheck -eq $isFullTime ]
+then
+	empHrs=8
+	echo "you're full time"
+else
+	empHrs=0
+	echo "you don't work"
+fi
 
 salary=$(($empHrs*$empRatePerHr));
 echo "you'r daily wage is: "$salary
+
