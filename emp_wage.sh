@@ -27,12 +27,9 @@ totalSalary=0;
 totalEmpHr=0;
 totalWorkingDays=0;
 
-while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH &&
-	$totalWorkingDays -lt $NUM_WORKING_DAYS ]]
-do
-	((totalWorkingDays++))
-	empCheck=$((RANDOM%3));
-	case $empCheck in
+function getWorkingHours() {
+	case $1 in
+	#case $empCheck in
 		$isFullTime)
 			empHrs=12
 			echo "worked full time"
@@ -46,10 +43,16 @@ do
 			echo "didn't work"
 			;;
 	esac
+}
+
+while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH &&
+	$totalWorkingDays -lt $NUM_WORKING_DAYS ]]
+do
+	((totalWorkingDays++))
+	empHours="$( getworkingHours $((RANDOMX3)) )"
 	totalEmpHrs=$(($totalEmpHrs+$empHrs))
 done
 
 totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR));
-
 echo "you'r wage for a month is: "$totalSalary
 
