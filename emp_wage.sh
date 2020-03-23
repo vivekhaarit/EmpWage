@@ -55,11 +55,12 @@ while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH &&
 	$totalWorkingDays -lt $NUM_WORKING_DAYS ]]
 do
 	((totalWorkingDays++))
-	empHours="$( getworkingHours $((RANDOMX3)) )"
+	empHours="$( getworkingHours $((RANDOMX%3)) )"
 	totalEmpHrs=$(($totalEmpHrs+$empHrs))
-	empDailyWage[$totalWorkingDays]="$( calcDailyWage $workHours )"
+	empDailyWage["$totalWorkingDays"]="$( calcDailyWage $workHours )"
 done
 
-totalSalary="$( calcDailyWage StotalWorkHours )"
+totalSalary="$( calcDailyWage $totalWorkHours )"
 echo "Daily Wage " ${empDailyWage[@]}
+echo "All Keys " ${!empDailyWage[@]}
 
