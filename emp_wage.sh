@@ -15,15 +15,19 @@ fi
 
 
 #calculating daily employee wage
-isPartTime=1;
+isFullTime=1;
+isPartTime=2;
 
 empRatePerHr=20;
-empCheck=$((RANDOM%2));
+empCheck=$((RANDOM%3));
 
 if [ $empCheck -eq $isFullTime ]
 then
-	empHrs=8
+	empHrs=12
 	echo "you're full time"
+elif [ $empCheck -eq $isPartTime ]
+	empHrs=8
+	echo "you're part time"
 else
 	empHrs=0
 	echo "you don't work"
