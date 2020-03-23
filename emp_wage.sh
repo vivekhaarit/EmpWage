@@ -21,17 +21,20 @@ isPartTime=2;
 empRatePerHr=20;
 empCheck=$((RANDOM%3));
 
-if [ $empCheck -eq $isFullTime ]
-then
-	empHrs=12
-	echo "you're full time"
-elif [ $empCheck -eq $isPartTime ]
-	empHrs=8
-	echo "you're part time"
-else
-	empHrs=0
-	echo "you don't work"
-fi
+case $empCheck in
+	$isFullTime)
+		empHrs=12
+		echo "you're full time"
+		;;
+	$isPartTime)
+		empHrs=8
+		echo "you're part time"
+		;;
+	*)
+		empHrs=0
+		echo "you don't work"
+		;;
+esac
 
 salary=$(($empHrs*$empRatePerHr));
 echo "you'r daily wage is: "$salary
