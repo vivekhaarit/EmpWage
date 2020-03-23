@@ -30,6 +30,7 @@ totalWorkingDays=0;
 while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH &&
 	$totalWorkingDays -lt $NUM_WORKING_DAYS ]]
 do
+	((totalWorkingDays++))
 	empCheck=$((RANDOM%3));
 	case $empCheck in
 		$isFullTime)
@@ -50,5 +51,5 @@ done
 
 totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR));
 
-echo "you'r wage for a month is: "$salary
+echo "you'r wage for a month is: "$totalSalary
 
